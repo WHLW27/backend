@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  year0: 9.99
+  year1: 9.99
+  year2: 9.99
+  year3: 9.99
+  year4: 9.99
+  year5: 9.99
+
+two:
+  year0: 9.99
+  year1: 9.99
+  year2: 9.99
+  year3: 9.99
+  year4: 9.99
+  year5: 9.99

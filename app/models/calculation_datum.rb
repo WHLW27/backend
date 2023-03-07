@@ -1,0 +1,2 @@
+class CalculationDatum < ApplicationRecord
+end
