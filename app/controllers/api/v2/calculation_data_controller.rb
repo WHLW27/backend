@@ -19,13 +19,8 @@ class Api::V2::CalculationDataController < ApplicationController
     # create a new record in he db
     @calculation_datum = CalculationDatum.new(calculation_datum_params)
 
-    logger.info "CalculationDatum info: #{@calculation_datum.inspect}"
-    logger.debug "CalculationDatum debug: #{@calculation_datum.inspect}"
-
     # get the data from the request
     information = request.raw_post
-    logger.info "information info: #{information}"
-    logger.debug "information debug: #{information}"
     data_parsed = JSON.parse(information)
 
     # assign the data to variables
@@ -54,9 +49,8 @@ class Api::V2::CalculationDataController < ApplicationController
     calc_percent = growth_percentage.to_f / 100
     calc_growth = invest_amount * (calc_percent + 1)
 
-    # calculate the interest
+    # calculate the principal
     principal = invest_amount
-    # logger.debug "principal: #{principal}"
 
     # iterate over the invest period
     i = 0
@@ -81,7 +75,7 @@ class Api::V2::CalculationDataController < ApplicationController
     # iterate over the invest period
     i = 0
     until i >= (invest_period)
-      # iterate over the new database object, in paricular the year values and assign them the values from the array
+      # iterate over the new database object, in particular the year values and assign them the values from the array
       @calculation_datum.attributes.drop(6 + i).slice(1, invest_period).each do |attr_name, attr_value|
         # skip the annual and monthly contribution values
         if attr_name == "annualContribution" || attr_name == "monthlyContribution"
@@ -93,12 +87,12 @@ class Api::V2::CalculationDataController < ApplicationController
     end
 
     # log the data
-    @calculation_datum.attributes.each do |attr_name, attr_value|
-      # logger.debug "calculation: #{attr_name}: #{attr_value}"
-    end
+    # @calculation_datum.attributes.each do |attr_name, attr_value|
+    #   # logger.debug "calculation: #{attr_name}: #{attr_value}"
+    # end
 
     # log the array
-    # logger.debug "return_array: #{return_array}"
+    logger.debug "return_array: #{return_array}"
 
     # if the data is valid, save it to the database and return the array
     if @calculation_datum.save
